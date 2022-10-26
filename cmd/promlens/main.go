@@ -154,6 +154,7 @@ func main() {
 	routePrefix := app.Flag("web.route-prefix", "Prefix for the internal routes of web endpoints. Defaults to path of --web.external-url.").Default("").String()
 
 	defaultPrometheusURL := app.Flag("web.default-prometheus-url", "The default Prometheus URL to load PromLens with.").Default("").String()
+	proxyPrometheusURL := app.Flag("web.proxy-prometheus-url", "The Prometheus URL to proxy to.").Default("").String()
 
 	var logCfg promlog.Config
 	promlogflag.AddFlags(app, &logCfg)
@@ -217,6 +218,7 @@ func main() {
 		Sharer:                     shr,
 		GrafanaBackend:             gb,
 		DefaultPrometheusURL:       strings.TrimRight(*defaultPrometheusURL, "/"),
+		ProxyPrometheusURL:         strings.TrimRight(*proxyPrometheusURL, "/"),
 		DefaultGrafanaDatasourceID: *grafanaDefaultDatasourceID,
 	}))
 }

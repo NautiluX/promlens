@@ -12,6 +12,7 @@ export interface PageConfig {
   grafanaDatasources: GrafanaDataSourceSettings[];
   pageState: ExportedStateV1 | ExportedStateV2orV3 | null;
   defaultPrometheusURL: string;
+  proxyPrometheusURL: string;
   defaultGrafanaDatasourceID: number;
 }
 

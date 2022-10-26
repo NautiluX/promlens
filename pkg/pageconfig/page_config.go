@@ -28,12 +28,14 @@ type pageConfig struct {
 	GrafanaDatasources   []grafana.DatasourceSettings `json:"grafanaDatasources"`
 	PageState            map[string]interface{}       `json:"pageState"`
 	DefaultPrometheusURL string                       `json:"defaultPrometheusURL"`
+	ProxyPrometheusURL   string                       `json:"proxyPrometheusURL"`
 }
 
 func Handle(
 	shr sharer.Sharer,
 	gb *grafana.Backend,
 	defaultPrometheusURL string,
+	proxyPrometheusURL string,
 	defaultGrafanaDatasourceID int64,
 ) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -87,6 +89,7 @@ func Handle(
 			GrafanaDatasources:   ds,
 			PageState:            pageState,
 			DefaultPrometheusURL: defaultPrometheusURL,
+			ProxyPrometheusURL:   proxyPrometheusURL,
 		})
 	}
 }

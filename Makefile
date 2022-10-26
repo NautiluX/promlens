@@ -53,3 +53,12 @@ clean:
 
 .PHONY: build
 build: build-ui assets-compress npm_licenses common-build
+
+IMG?=quay.io/mdewald/promlens
+simple-docker-build: build
+	mkdir -p .build/linux-amd64
+	cp promlens .build/linux-amd64
+	docker build . -t $(IMG) 
+
+simple-docker-push: simple-docker-build
+	docker push $(IMG) 

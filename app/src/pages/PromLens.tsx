@@ -146,9 +146,22 @@ const PromLens: FC<RouteComponentProps & PathPrefixProps> = ({ pathPrefix }) => 
 
         // Precedence override order:
         //
+        // - proxy-url: take page url
         // - command-line default
         // - page state from shared link
         // - explicit "?s=<server-url>" override
+
+        // If a command-line proxy server is present, set that first.
+        if (pageConfig.proxyPrometheusURL !== '') {
+          store.dispatch(
+            setServerSettings({
+              access: 'direct',
+              datasourceID: null,
+              withCredentials: false,
+              url: window.location.href.split('?')[0] + '/api/proxy',
+            })
+          );
+        }
 
         // If a command-line default server is present, set that first.
         if (pageConfig.defaultPrometheusURL !== '') {
