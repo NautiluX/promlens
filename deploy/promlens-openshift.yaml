@@ -41,6 +41,19 @@ spec:
       schedulerName: default-scheduler
       terminationGracePeriodSeconds: 30
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: promlens
+  name: promlens
+  namespace: promlens
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: promlens
+---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
